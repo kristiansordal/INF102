@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[twocolumn]{article}
 \input{preamble.tex}
 \begin{document}
 \section{Forelesning 1}
@@ -22,4 +22,28 @@ Algorithms by Robert Sedgewick \( 4^{\text{th}} \) edition. Kapittel 1-4 er pens
     \item Søking
     \item Grafer
 \end{enumerate}
+
+\subsection{Beregne summen fra 1 til  n }
+Følgende formel brukes for å regne summen fra 1 til \( n \).
+
+\[ 1+2+3+\cdots + n = \sum_{i}^{n} \frac{n \cdot \left( n+1 \right)}{2} \]
+
+Kjøretiden til implementasjonen kan estimeres til
+
+\[ \frac{n \cdot \left( n + 1 \right)}{2}\cdot  20 \approx 10n^2 \]
+
+\begin{align*}
+    10 \cdot  n^2 &= 10^{9} \\
+                  &\approx10000
+\end{align*}
+
+Kjøretid på et tilsvarende program som bruker \verb!Collections.sort()! vil ha en kjøretid på ca. \[ 10 \cdot  n \log n + 10 \cdot  n = 10^{9} \]
+
+Når \( n \) blir stor, er alltid \( n \log n  \) raskere enn \( n^2 \).
+
+\subsection{Hvordan forenkle beregninger?}
+Det er tidkrevende å kjøre programmet og ta tiden. Det er vanskelig å vite nøyaktig hvor mange operasjoner det er, derfor velger vi å beholde største ledd, og vi ser bort ifra konstanter. Som eksempel kan følgende formel forenkles.
+
+\[ \frac{n \cdot  \left( n + 1 \right)}{2} \cdot  20 = \sim 10 n^2 = O\left( n^2 \right) \]
+
 \end{document}
