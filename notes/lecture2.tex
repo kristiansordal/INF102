@@ -1,0 +1,98 @@
+\documentclass[twocolumn]{article}
+\input{preamble.tex}
+\begin{document}
+    \section{Forelesning 2}
+
+    \subsection{Hva er en datastruktur}
+    En algoritme tar input, gjør beregninger, og gir output. Datastrukturer lagrer data og har flere forskjellige oppgaver som kan utføres på disse dataene.
+
+\begin{eg}
+    \textbf{GPS Navigasjonsenhet}
+
+    \begin{itemize}
+        \item Har veinettverk
+        \item Kan be om korteste vei fra start til mål
+    \end{itemize}
+
+    Er dette en algoritme eller en datastruktur?
+\end{eg}
+
+\verb!Collection <E> interface! er en samling med objekter av typen \verb!E!. Viktige metoder er
+
+\begin{itemize}
+    \item \verb!size()!
+    \item \verb!contains(Object 0)!
+    \item \verb!add (E e)!
+    \item \verb!Remove(Object obj)!
+    \item \verb!toArray()!
+\end{itemize}
+
+\verb!List! er en utvidelse av \verb!Collection! med litt flere metoder. Elementene i en liste har en indeks, og noen viktige metoder i \verb!List! er
+
+\begin{itemize}
+    \item \verb!indexOf(Object obj)!
+    \item \verb!get(int index)!
+    \item \verb!set(int index, E e)!
+\end{itemize}
+
+\subsection{Array List}
+
+I \verb!ArrayList! brukes en array av typen \verb!Object[]!. Bare en del av arrayen har data. Når dette arrayet blir fullt må vi lage et større array. Dette betyr at det er lett å få \verb!IndexOutOfBoundsException!. For eksempel kan man lage et nytt array av dobbel størrelse, hvor alle elementer fra forrige array kopieres over til det nye arrayet.
+
+\subsection{Linked List}
+
+En Linked List er en liste hvor hvert element i listen lagres i et eget node object. Hver node vet kun neste og forrige node. Listen vet kun første og siste node. For å finne node \( i \), så starter vi på første node og "hopper" \( i \) ganger.
+\bigskip
+
+En linked list som kun vet neste element kalles en \textit{Single Linked List}, og en linked list som vet både neste og forrige element kalles en \textit{Double Linked List}.
+
+\subsection{Hvordan finne kjøretid på metoder?}
+
+Man må vite hvordan \verb!ArrayList! og \verb!LinkedList! er implementert. Ved å forstå hva \verb!ArrayList! og \verb!LinkedList! gjør, er det lett å forstå hva kjøretiden er. Ukesoppgaven er og implementere enkle versjoner av disse listene.
+
+\subsection{Kø og Stabel}
+
+\begin{table}[H]
+        \begin{tabular}[c]{|l|l|}
+            \hline
+            Kø & Stabel  \\
+            \hline
+             FIFO& FILO / LIFO  \\
+             Legger til sist& Legger til sist  \\
+             Fjerner først& Fjerner sist   \\
+            \hline
+        \end{tabular}
+\end{table}
+
+\subsubsection{Metoder i Queue og Stack}
+
+\begin{table}[H]
+    \begin{tabular}[c]{|l|l|l|}
+        \hline
+         List&Queue&Stack  \\
+        \hline
+         add(E e)&offer(E e)&push(E e)  \\
+         remove(int i)&poll()&pop()  \\
+         get(int i)&peek()&peek()  \\
+         &&  \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Set}
+
+Set er en Collection der hvert element kun kan være der en gang. Elementene har ikke en ebstemt ordning. Set har heller ikke \verb!indexOf(element)! metoden.
+
+\begin{table}[H]
+        \begin{tabular}[c]{|l|l|l|}
+            \hline
+            &HashSet&TreeSet \\
+            \hline
+             \verb!add()!&\(O(1) ^{\star} \) & \( O(\log n) \)   \\
+             \verb!remove()!& \( O(1) \)& \( O\left( \log n \right) \)  \\
+                   \verb!contains(obj)!&\( O\left( 1 \right) \)&\( O\left( \log n \right) \)\\
+            \hline
+        \end{tabular}
+\end{table}
+
+\end{document}
