@@ -2,6 +2,8 @@ package weeklytasks.week1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+// import java.io.FileWriter;
+// import java.io.IOException;
 
 public class task1 {
     private static <T> Boolean compare(Integer x, Integer y) {
@@ -9,6 +11,7 @@ public class task1 {
     }
 
     public static Integer threeSumLargest(ArrayList<Integer> list) {
+    // public static long threeSumLargest(ArrayList<Integer> list) {
         int n = list.size();
         Integer largest = 0;
 
@@ -25,7 +28,7 @@ public class task1 {
                         if (compare(num, largest)) {
                             largest = num;
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -33,18 +36,22 @@ public class task1 {
         System.out.println("Elapsed time: " + (end1 - start1) + " nanoseconds");
         System.out.println(largest);
         return largest;
+        // return (end1 - start1);
     }
 
     public static Integer fastThreeSumLargest(ArrayList<Integer> list) {
+    // public static long fastThreeSumLargest(ArrayList<Integer> list) {
         long start2 = System.nanoTime();
-        Collections.sort(list, Collections.reverseOrder());
+        int size = list.size();
+        Collections.sort(list);
 
-        Integer largest = list.get(0) + list.get(1) + list.get(2);
+        Integer largest = list.get(size - 1) + list.get(size - 2) + list.get(size - 3);
         long end2 = System.nanoTime();
 
         System.out.println("Elapsed time: " + (end2 - start2) + " nanoseconds");
         System.out.println(largest);
         return largest;
+        // return (end2 - start2);
     }
 
     public static <T> void main(String[] args) {
@@ -60,5 +67,18 @@ public class task1 {
 
         threeSumLargest(list);
         fastThreeSumLargest(list);
+
+        // try {
+        //     FileWriter myWriter1 = new FileWriter("task1timefast.txt");
+        //     for (int i = 0; i <= 25; i++) {
+        //         long largest = fastThreeSumLargest(list);
+        //         myWriter1.write("(" + i + "," + largest + ")");
+        //     }
+        //     myWriter1.close();
+
+        // } catch (IOException e) {
+        //     System.out.println("An error occurred.");
+        //     e.printStackTrace();
+        // }
     }
 }

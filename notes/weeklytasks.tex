@@ -6,4 +6,159 @@
 
 Given a list of integers, write an algorithm that selects the three numbers that summed gives the largest value. 
 \( [8, 19, -1, 27, 3, 9, -40] \). The largest value that three of the numbers sums to is 55. What runtime does your algorithm have?
+
+\subsubsection{Solution}
+I came up with two solutions for this problem, the first problem is a rather slow solution, and as there are three nested for loops, this program runs in \( O\left( n^3 \right) \) time.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{threeSumLargest.png}
+    \end{center}
+    \caption{First solution for this problem}
+    \label{fig:threeSumLargest}
+\end{figure}
+
+The second solution is slightly faster, however finding its time complexity is slightly harder, as we are using some methods from the \textit{Collections} framework. As shown in Figure \ref{fig:fastThreeSumLargest.png}, we can see that \textit{Collections.Sort} and has been used. Doing a quick google search, we find that this method has a time complexity of \( O\left( n \log\left( n \right) \right) \).
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{fastThreeSumLargest.png}
+    \end{center}
+    \caption{Second solution, slightly faster}
+    \label{fig:fastThreeSumLargest.png}
+\end{figure}
+
+Comparing the two solutions, we get the the following graph. As we can see, the faster solution is vastly surperior to the slower version.
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Three sum algorithms compared},
+    xlabel={Run no.},
+    ylabel={Time [ns]},
+    xmin=0, xmax=25,
+    ymin=0, ymax=90000,
+    xtick={0,1,...,25},
+    ytick={5000,10000,...,90000},
+    legend pos=north west,
+    ymajorgrids=true,
+    xmajorgrids=true,
+    grid style=dashed,
+    width = 15cm,
+    height = 10cm,
+]
+
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+    (0,86875)(1,56833)(2,42333)(3,41209)(4,47417)(5,41500)(6,42167)(7,41458)(8,41333)(9,41500)(10,42083)(11,41833)(12,41416)(13,41083)(14,41792)(15,41750)(16,41875)(17,41208)(18,56083)(19,42583)(20,45333)(21,41625)(22,43917)(23,40834)(24,48875)(25,49500)
+    };
+    % \legend{threeSumLargest}
+
+\addplot[
+    color=red,
+    mark=square,
+    ]
+    coordinates {
+(0,5417)(1,2084)(2,1667)(3,1291)(4,1250)(5,1209)(6,1209)(7,1250)(8,1250)(9,1250)(10,1208)(11,1250)(12,1250)(13,1208)(14,1166)(15,1167)(16,1167)(17,1208)(18,17625)(19,4667)(20,15958)(21,3166)(22,1709)(23,1458)(24,1458)(25,1250)
+    };
+\legend{threeSumLargest \(  \left[ O\left( n^3 \right) \right] \), fastThreeSumLargest \( \left[ O\left( n \log\left( n \right) \right) \right] \)}
+    
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\subsection{Task 2}
+Given a sorted list of integers, write an algorithm that runs in linear time \( (O(n)) \) that determines if two numbers sum to 0.  \( [-10, -8, -4, -1, 5, 8, 18, 20, 40] \). mk and \( 8 \) sum to \( 0 \) hence this list should yield \textit{true}.
+
+\subsubsection{Solution}
+This problem is a \textit{two sum} problem, which usually is solved with a time complexity of \( O\left( n^2 \right) \). Again two solutions were developed, one of which is the standard solution, running in \( O\left( n^2 \right) \) time, and the other being a faster solution, running in \( O\left( n \right) \) time, or linear time.
+\bigskip
+
+The first solution uses two nested for loops to check if two of the integers sum to the desired goal sum. Because there are two for loops, its a rather slow solution, and it runs in \( O\left( n^2 \right) \) time, as mentioned.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{twoSum.png}
+    \end{center}
+    \caption{First and slower solution of the problem}
+    \label{fig:twoSum.png}
+\end{figure}
+
+The faster solutions, employs the usage of an empty HashSet. It then loops through the list and checks if one of three conditions are met. The first condition occurs when the set is empty, is the simply adds the currenet element to the list. Next it checks if the set \textit{doesn't} contain the result of the sum subtracted from the current element, if it doesn't, it adds the current element to the list. Lastly, if none of the previous conditions are met, it means that we have found that two integers in the list sum to our desired sum, and the variable \textit{containsTwo} is set to true.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{fastTwoSum.png}
+    \end{center}
+    \caption{Second, faster solution}
+    \label{fig:fastTwoSum.png}
+\end{figure}
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    title={Two sum algorithms compared},
+    xlabel={Run no.},
+    ylabel={Time [ns]},
+    xmin=0, xmax=25,
+    ymin=0, ymax=50000,
+    xtick={0,1,...,25},
+    ytick={5000,10000,...,90000},
+    legend pos=north west,
+    ymajorgrids=true,
+    xmajorgrids=true,
+    grid style=dashed,
+    width = 15cm,
+    height = 10cm,
+]
+
+\addplot[
+    color=blue,
+    mark=square,
+    ]
+    coordinates {
+    (0,23333)(1,16167)(2,24041)(3,40000)(4,9542)(5,7541)(6,7667)(7,6958)(8,6792)(9,6791)(10,8625)(11,7541)(12,6792)(13,6917)(14,8042)(15,7042)(16,6875)(17,6750)(18,7125)(19,6792)(20,6833)(21,6958)(22,7250)(23,7042)(24,6792)(25,8459)
+    };
+    % \legend{threeSumLargest}
+
+\addplot[
+    color=red,
+    mark=square,
+    ]
+    coordinates {
+    (0,16959)(1,8667)(2,8125)(3,6958)(4,6792)(5,8041)(6,7375)(7,14791)(8,6917)(9,14708)(10,6917)(11,6834)(12,7250)(13,8042)(14,15125)(15,13542)(16,6458)(17,31250)(18,10459)(19,5792)(20,5750)(21,6958)(22,5833)(23,6750)(24,6250)(25,6209)
+    };
+    \legend{twoSum \( \left[ O\left( n^2 \right) \right] \), fastTwoSum \( \left[ ? \right] \)}
+    
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+As we can see, it does not look like the "faster" version of this algorithm actually is faster, further optimization is certainly appropriate.
+
+\subsection{Task 3}
+Sort the functions based on which grows fastest when n becomes large:
+
+\begin{itemize}
+\item \(f(n)\) = \( n^2 + n \)
+\item \(f(n)\) = \( n * \log (n) \)
+\item \(f(n)\) = \( n \cdot  n \)
+\item \(f(n)\) = \( n \cdot  (log(n))^3 \)
+\end{itemize}
+\newpage 
+
+The functions above grow fastest according to the following list
+
+\begin{enumerate}
+    \item \(f(n)\) = \( n^2 + n \)
+    \item \(f(n)\) = \( n \cdot  n \)
+    \item \(f(n)\) = \( n \cdot  (log(n))^3 \)
+    \item \(f(n)\) = \( n * \log (n) \)
+\end{enumerate}
+
+
+
 \end{document}

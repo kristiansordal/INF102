@@ -9,6 +9,8 @@
 \usepackage{standalone}
 \usepackage{tcolorbox}
 \usepackage{wrapfig}
+\usepackage{pgfplots} 
+% \pgfplotsset{scaled y ticks=false}
 % \usepackage{svg}
 % \usepackage{svg-inkscape} 
 
@@ -275,6 +277,8 @@
 	\import{./figures/}{#2.pdf_tex}
 	% \end{center}
 }
+
+\graphicspath{{./figures/}}
 % Fix some stuff
 % %http://tex.stackexchange.com/questions/76273/multiple-pdfs-with-page-group-included-in-a-single-page-warning
 \pdfsuppresswarningpagegroup=1
