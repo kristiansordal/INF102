@@ -1,0 +1,52 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+   \section{Forelesning 3} 
+
+   \subsection{Big \( O \) Kjøretid}
+   Variablen \( n \) er vanligvis definert som størrelse på input, men den kan defineres til hva som helst. Når vi beregner kjøretid er \( f\left( n \right) \) max antall opersjoner PCen må gjøre når et program kjøres på en input av størrelse \( n \). Det vil si, velg den verste input av størrelse \( n \). Teoretisk er vi interessert i 
+
+   \[ \sum_{n=0}^{\infty} f\left( n \right) \]
+
+Mens praktisk er vi interessert i når \( f\left( n \right) \) er \( 10^{9} \) til \( 10^{12} \). Vi har at
+
+\begin{align*}
+    3 + 7 &\leq 2 \cdot  7 \\
+    124 + 98 &\leq 2 \cdot  124 \\
+\end{align*}
+
+Dette gir oss følgende formel
+
+\[ a + b \leq 2 \cdot  max(a, b) \]
+
+Som resulterer i
+
+\begin{align*}
+    O\left( 1 \right) + O\left( 1 \right) &= O\left( 1 \right) \\
+    O\left( 1 \right)+O\left( n \right) &= O\left( n \right) \\
+    O\left( n \right) + O\left( n^2 \right) &= O\left( n^2 \right)
+\end{align*}
+
+Big O beskriver et sett med funksjoner. \( n^2+3n \) og \( 7n^2 \) er i \( O\left( n^2 \right) \). Alle funksjoner som er mindre er også med, dvs at \( 3n \) og \( 7n \log\left( n \right) \) er i \( O\left( n^2 \right) \).
+
+\begin{definition}
+    En funksjon \( f\left( n \right) \) er i \( O\left( g\left( n \right) \right) \) dersom det finnes konstanter \( c \) og \( N \) slik at \( f\left( n \right) < c \cdot  g\left( n \right) \) for alle \( n > N \), eller, skrevet rent matematisk
+
+    \[ f\left( n \right) \in O\left( g\left( n \right) \right) \Rightarrow f\left( n \right) < c \cdot  g\left( n \right) \forall \phantom{i} n > N\]
+
+    % gcdcb
+\end{definition}
+
+\subsection{Doubling Rate}
+Hva skjer med kjøretid når input blir dobbelt så stor?
+
+\begin{itemize}
+    \item \( O\left( 1 \right) \) - Ingenting, ikke avhengig av \( n \).
+    \item \( O\left( n \right) \) - \( c \cdot  n \rightarrow c \cdot  2n \), dobbelt så lang tid.
+    \item \( O\left( n^2 \right) \) - \( c \cdot n^2 \rightarrow c \cdot \left( 2n \right)^2 \), fire ganger så stort.
+    \item \( O\left( n^3 \right) \) - \( c \cdot n^3 \rightarrow c\left( 2n \right)^3 \), 8 ganger så stort.
+\end{itemize}
+
+
+\end{document}
