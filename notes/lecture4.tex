@@ -1,0 +1,84 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 4}
+
+    \subsection{Rekursjon - Fibonacci}
+
+    \subsection{Binære trær}
+
+    Et binært tres antall noder dobles for hvert nivå man går nedover treet.
+
+    \subsection{Binærsøk}
+
+    \textbf{Problem:} Sortert tabell med \( n \) element, leter etter et bestemt element. Hvor mange ganger må vi teste før vi er sikker på å finne det?
+
+    \begin{enumerate}
+        \item Forsøk - \( n \) element igjen: prøver midterste element
+        \item Forsøk - \( \frac{n}{2}  \) element igjen: prøver igjen midterste element
+    \end{enumerate}
+
+    Osv, til det kun er ett element igjen.
+
+    \subsection{Sortering - hvorfor?}
+
+    \subsubsection{Hva er sortering?}
+
+    Sortering er en total ordning av en mengde \( A \). F. eks følgende ordning
+
+    \[ a_{1} \leq a_{2} \leq a_{3} \leq \cdots \leq a_{n} \]
+
+    Ordningen kan være anti-symmetrisk.
+
+    \[ - a \leq b \wedge a \geq b \Rightarrow a = b \]
+
+    Eller Transitiv
+
+    \[ a \leq b \wedge b \leq c \rightarrow a \leq c  \]
+
+    Eller Total
+
+    \[ a \leq b \vee b \leq a \]
+
+    \subsection{Sortering i Java}
+
+    Man kan sortere med f. eks \texttt{Collections.sort(List <T> list)}, men hvilken type må \texttt{T} være? Man må implementere Comparable. Med Java generics blir det litt mer komplisert, men man kan implementere comparable på følgende måte.
+
+    \[ \texttt{T extends Comparable <? super T>} \]
+
+    \subsubsection{Comparable Interface}
+
+    \begin{itemize}
+        \item \texttt{public int compareTo(T obj);}
+            \begin{itemize}
+                \item Returnerer -1 hvis \texttt{this < obj}
+                \item Returnerer 0 hvis \texttt{this == obj}
+                \item Returnerer 1 hvis \texttt{this > obj}
+            \end{itemize}
+        \item Beskriver naturlig ordning
+            \begin{itemize}
+                \item Integer, Double, String, Date...
+            \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Sortere på forskjellige måter}
+    Da må man bruke \texttt{Comparator interface}
+
+    \[ \texttt{int compare(T o1, T o2)} \]
+
+    \subsubsection{Mange sorteringsalgoritmer}
+    \begin{itemize}
+        \item Selection sort
+        \item Merge Sort
+        \item Heap Sort
+        \item Bogo Sort (The GOAT)
+        \item Insertion Sort
+        \item Shell Sort
+        \item Quick Sort
+        \item Bucket Sort
+        \item Radix Sort
+        \item Bubble Sort
+    \end{itemize}
+
+\end{document}
