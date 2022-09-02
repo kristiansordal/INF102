@@ -1,7 +1,7 @@
 \documentclass{article}
 \input{preamble.tex}
 \begin{document}
-   \section{Week 1} 
+   \section{Week 2} 
    \subsection{Task 1}
 
 Given a list of integers, write an algorithm that selects the three numbers that summed gives the largest value. 
@@ -158,6 +158,42 @@ The functions above grow fastest according to the following list
     \item \(f(n)\) = \( n \cdot  (log(n))^3 \)
     \item \(f(n)\) = \( n \cdot \log (n) \)
 \end{enumerate}
+\newpage
+
+\section{Week 3}
+Determine the runtime of the following recursive methods.
+
+\subsection{Task 1}
+Factorial of a non-negative integer \( n \) is the product of all positive integers less than or equal to \( n \). For instance, the factorial of 5 is equal to \( 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 120 \).
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.65\textwidth]{factorial.png}
+    \end{center}
+\end{figure}
+
+This method has the runtime of \( O\left( n \right) \).
+
+\subsection{Task 2}
+What is the runtime of the following methods, i.e. how many times is \texttt{step()} called?
+
+\subsubsection{a.}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.55\textwidth]{foo.png}
+    \end{center}
+\end{figure}
+
+This method has the runtime of \( O\left( \log (n) \right) \) 
+\subsubsection{b.}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.55\textwidth]{foo2.png}
+    \end{center}
+\end{figure}
+
+This method has the runtime of \( O\left( n \log\left( n \right) \right) \)
+
 
 
 
