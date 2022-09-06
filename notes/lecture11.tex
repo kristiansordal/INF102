@@ -1,0 +1,43 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 11}
+
+    \subsection{Bredde først søk (BFS)}
+    Hver gang man implementerer noe har man to valg, enten gjøre det iterativt, eller rekursivt. Ofte blir koden man skriver lettere dersom man bruker rekursjon.
+    \medskip
+
+    DFS egner seg godt til en rekursiv implementasjon, og BFS egner seg ofte godt til en iterativ implementasjon.
+
+    \subsubsection{La oss implementere BFS}
+    \begin{itemize}
+        \item Jeg skal bruke grafklassen som dere har fått utdelt med semesteroppgave 2
+    \end{itemize}
+
+    \subsection{Vektet graf}
+    \begin{itemize}
+        \item Ofte er det naturlig å ha vekter på kantene
+            \begin{itemize}
+                \item For eksempel noder er byer, kanter er veier
+                \item Vekt på kant er lengde på veien i km
+            \end{itemize}
+        \item Vi kan ønske å finne stien med minst sum av vekter.
+            \begin{itemize}
+                \item Korteste vei å kjøre fra en by til en annen.
+            \end{itemize}
+    \end{itemize}
+
+    % Hvordan finne korteste vei fra \( c \) til andre noder?
+
+    \subsection{Minimum spanning tree}
+    \begin{itemize}
+        \item En sub-graf er en graf som kan lages fra en annen graf ved å fjerne kanter.
+        \item Et tre er en sammenhengende graf uten sykler
+        \item Et sub-tre er en subgraf som er et tre
+        \item Et spanning sub-tre er et sub-tre der alle nodene er med (ingen noder er slettet)
+    \end{itemize}
+
+    En av oppgavene i Semesteroppgave 2 er å implementere \textbf{Prims algoritme}.
+
+\end{document}
