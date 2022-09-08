@@ -3,4 +3,73 @@
 
 \begin{document}
     \section{Forelesning 5}
+
+    \subsection{Selection Sort}
+
+    \begin{itemize}
+        \item Finn det minste elementet
+        \item Flytt det først (index 0)
+        \item Finn minste elementet blant de \( n - 1 \) siste.
+        \item Flytt det på andre posisjon (index 1)
+    \end{itemize}
+
+    \( \cdots  \) til alle elementene er sortert.
+\bigskip
+
+Hva er kjøretiden til denne funksjonen?
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.95\textwidth]{selectionsort.png}
+    \end{center}
+    \caption{Selection sort har kjøretid \( O\left( n^2 \right) \)}
+    \label{fig:selectionsort.png}
+\end{figure}
+
+\subsection{"In-Place" Sortering}
+\begin{itemize}
+    \item Sortere uten å bruke ekstra minne
+    \item Ikke lag ny liste, men bytt elementer i listen
+    \item Dette forbedrer ikke big-O kjøretid, men kan redusere konstantene i kjøretiden
+    \item Dette kalles optimering av kode
+\end{itemize}
+
+\subsection{Insertion Sort}
+\begin{itemize}
+    \item Lag en ny liste
+    \item Gå gjennom elementene
+\end{itemize}
+
+\subsection{Quick Sort}
+
+\begin{itemize}
+    \item Finn et element kalt "pivot"
+    \item Divide:
+        \begin{itemize}
+            \item Første list \( \leq \) pivot
+            \item Siste list \( \geq \) pivot
+            \item Hva med de lik pivot?
+        \end{itemize}
+    \item Sort hver liste rekursivt.
+    \item Slå sammen disse listene
+        \begin{itemize}
+            \item Siden vi delte inn i basert på pivot blir det
+            \item Første, pivot, siste
+        \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Hva er kjøretiden til QuickSort
+    \begin{itemize}
+        \item Det ligner litt på merge sort
+        \item Vi deler opp i to lister, men er de like store?
+        \item Hvor mange ganger må vi dele opp?
+    \end{itemize}
+\item I verste tilfelle blir pivot det største eller minste elementet?
+\item I beste tilfelle blir pivot det midterste elementet.
+
+\end{itemize}
+
+Quicksort har altså runtime \( T \in (O\left( n \log\left( n \right) \right), O\left( n^2 \right))\)
+
 \end{document}
