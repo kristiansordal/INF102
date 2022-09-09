@@ -1,0 +1,76 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 6}
+
+    \subsection{Divide \& Conquer}
+    \begin{itemize}
+        \item En nyttig strategi når man skal finne ffektive algoritmer.
+        \item Divide
+            \begin{itemize}
+                \item Del opp input og løs hver del for seg
+            \end{itemize}
+        \item Conquer
+            \begin{itemize}
+                \item Finn en måte å slå sammen de to delene til løsning for hele input
+            \end{itemize}
+    \end{itemize}
+
+    \subsection{Mergesort}
+    \begin{itemize}
+        \item Divide
+            \begin{itemize}
+                \item Lag to lister som hver har halvparten av elementene
+                \item Sorter de to små listene
+            \end{itemize}
+        \item Conquer
+            \begin{itemize}
+                \item Gitt to små sorterte lister, slå disse sammen til en stor sortert liste.
+            \end{itemize}
+            \item La oss implementere mergesort.
+    \end{itemize}
+
+    \subsection{Nedre grense på kjøretid}
+    \begin{itemize}
+        \item Vi kan se å sortering som å velge den rette ordningen blant alle mulige ordninger av en liste.
+        \item Hvor mange måter er det å ordne \( n \) elementer? (\( n! \))
+        \item Tenk deg en liste av alle mulige ordninger
+        \item Gjør en sammenligning av 2 elementer \( a \) og \( b \).
+        \item Blant alle ordninger i listen kan vi
+        \begin{itemize}
+            \item Enten Krysse ut de der \( a < b \)
+            \item Eller krysse ut de der \( b < a \)
+        \end{itemize}
+
+        \item Hvor mange ganger må vi dele på 2 før \( n! \) blir 1?
+            \item \( \log\left( n! \right) \)
+    \end{itemize}
+
+    \subsection{Sorter \( n \) heltall}
+    \begin{itemize}
+        \item Hvor for kan vi sortere \( n \) heltall der alle tallene er
+            \begin{itemize}
+                \item Mellom 0 og 1000
+                \item Mellom 0 og \( n \)
+                \item Mellom 0 og \( n^2 \)
+            \end{itemize}
+    \end{itemize}
+
+    \subsection{Bucket Sort}
+    \begin{itemize}
+        \item Ikke egentlig en sorteringsalgoritme
+            \item Deler opp i grupper (buckets/bins)
+                \begin{itemize}
+                    \item For alle par \( a,b \) har vi: \( a \leq b \leftrightarrow \text{bucket}(a) \leq \text{bucket}(b) \)
+                \end{itemize}
+                \item Trenger funksjon for bucket nummer
+                    \begin{itemize}
+                        \item Eksempel: String, 26 buckets, \( a \) i første, \( b \) i andre.
+                    \end{itemize}
+                    \item Radix sort ligner på bucket sort
+                        \begin{itemize}
+                            \item Deler igjen opp hver bucket basert på 2. bokstav.
+                        \end{itemize}
+    \end{itemize}
+\end{document}
