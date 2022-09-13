@@ -1,0 +1,134 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 7}
+
+    \subsection{Problem vi skal løse idag}
+
+    \subsection{Priority Queue}
+
+    \begin{itemize}
+        \item En datastruktur med følgende operasjoner
+        \begin{itemize}
+            \item \texttt{add(T element)}
+            \item \texttt{T findMin()} (eller \texttt{findMax})
+            \item \texttt{T removeMin()} (eller \texttt{removeMax})
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Linked list}
+    \begin{itemize}
+        \item \texttt{add(T element)} - \( O\left( 1 \right) \)
+        \item \texttt{T findMin()} - \( O\left( n \right) \)
+        \item \texttt{T removeMin()} - \( O\left( n \right) \)
+   \end{itemize}
+
+   \subsubsection{Sortert Liste}
+   \textbf{Data-invariant}: Listen er sortert
+
+   \begin{itemize}
+        \item \texttt{add(T element)} - \( O\left( n \right) \)
+        \item \texttt{T peekMin()} - \( O\left( 1 \right) \)
+        \item \texttt{T removeMin()} - \( O\left( 1 \right) \)
+   \end{itemize}
+
+    \subsection{Eksempel på bruk av priority queue}
+
+    \begin{itemize}
+        \item  Kø på legevakten
+        \begin{itemize}
+            \item De som er mest syk kommer til først
+        \end{itemize}
+    \item Operativsystem
+        \begin{itemize}
+            \item Viktige prosesser får høy prioritet
+        \end{itemize}
+    \item Graf algoritmer - mer i kaptitel 4
+    \item Huffman data compression
+        \begin{itemize}
+            \item De vanligste sekvensene får kort kode
+            \item De minst vanlige får lang kode
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Binary Tree - Datainvariant}
+    \begin{itemize}
+        \item 1 root
+        \item Hver node har opp til 2 children
+        \item Hvis \( a \) er child av \( b \) så sier vi at \( b \) er parent av \( a \)
+        \item Hver node har 1 parent untatt root som har 0.
+        \item De nederste nodene kalles \textit{leaf}
+    \begin{figure}[H]
+	\centering
+	\incfig{binarytree}
+    \caption{Binært tre}
+    \end{figure}
+    \end{itemize}
+
+    \subsection{Complete binary tree}
+
+    Et komplett binært tre består av halvparten som løv, og den andre halvparten av noder og røtter. Høyden til et komplett binært tre er \( \log\left( n \right) \).
+
+    \subsection{Heap - data invariant}
+    \begin{itemize}
+        \item Er et binary tree med følgende krav:
+            \begin{itemize}
+                \item Hver node er mindre enn alle sin children
+                \item Treet er balansert
+            \end{itemize}
+    \end{itemize}
+
+
+    \subsubsection{Kjøretid}
+
+    \begin{itemize}
+        \item \texttt{add(T element)} - \( O\left( \log\left( n \right) \right) \)
+        \item \texttt{T peekMin} - \( O\left( 1 \right) \)
+        \item \texttt{T removeMin()} - \( O\left( \log\left( n \right) \right) \)
+    \end{itemize}
+
+    \subsection{Heap Sort}
+    \begin{itemize}
+        \item Kan vi bruke Heap til å sortere?
+        \item La oss implementere HeapSort.
+    \end{itemize}
+
+    \subsection{Median Data Structure}
+    Use sorted ArrayList
+
+    \begin{itemize}
+        \item \texttt{add()} - \( O\left( n \right) \)
+        \item \texttt{findMedian()} - \( O\left( 1 \right) \)
+    \end{itemize}
+
+    Bruk to heap datastrukturer, en larger alle elementer midnre enn median, den andre lagrer alle elementer større enn median.
+
+    \begin{itemize}
+        \item \texttt{add()} - \( O\left( \log n \right) \)
+        \item \texttt{findMedian()} - \( O\left( 1 \right) \)
+    \end{itemize}
+
+    \subsection{Heap - Initialize}
+    Gitt en liste, hvor for kan vi legge inn alle elementene i en Heap?
+
+    \begin{lstlisting}
+        for (T elem : list)
+            heap.add(elem) 
+    \end{lstlisting}
+
+    Dette gir kjøretid \( O\left( n \log \left(  n \right) \right) \)
+
+    \subsubsection{Kjøretid}
+
+    \begin{itemize}
+        \item Nederste level: 0 
+        \item Nest nederste: \( \frac{n}{2} \cdot 1 \)
+        \item Nest nest nederste: \( \frac{n}{4} \cdot  2  \)
+    \end{itemize}
+
+    Totalt:
+    \[ \sum_{i=1}^{\log\left( n \right)} \frac{n \cdot i}{2^{i}} \in O\left( n \right) \]
+
+
+\end{document}

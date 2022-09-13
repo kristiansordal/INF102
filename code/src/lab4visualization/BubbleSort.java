@@ -2,6 +2,7 @@
 package lab4visualization;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.awt.*;
 import java.awt.Graphics;
@@ -44,10 +45,20 @@ public class BubbleSort extends Canvas{
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Bubble Sort");
-        Canvas list = new BubbleSort();
-        // final Graphics g = new Graphics();
-        list.setSize(400, 400);
-        frame.add(list);
+        Canvas canvas = new BubbleSort();
+        Graphics g = getGraphics();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
+
+        canvas.setSize(400, 400);
+        frame.add(canvas);
+        frame.add(canvas.sort(list, ))
         frame.pack();
         frame.setVisible(true);
 
