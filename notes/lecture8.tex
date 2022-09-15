@@ -1,0 +1,72 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 8}
+
+    \subsection{Set datastruktur}
+
+    \begin{itemize}
+        \item Set er nesten list, bare at i set er alle elementer unike.
+        \item Viktige metoder
+            \begin{itemize}
+                \item Add
+                \item Remove
+                \item Contains
+            \end{itemize}
+        \item Set i Java:
+            \begin{itemize}
+                \item TreeSet
+                \item HashSet
+            \end{itemize}
+    \end{itemize}
+
+    % \subsubsection{Set kjøretid}
+
+    % \begin{table}[H]
+    %     \begin{tabular}[c]{|c|c|c|}
+    %         \hline
+    %          &&  \\
+    %          &&  \\
+    %          &&  \\
+    %         \hline
+    %     \end{tabular}
+    % \end{table}
+
+    \subsection{Binary search tree}
+
+    \begin{itemize}
+        \item Binært søketre på norsk
+        \item Den datastrukturen som er brukt i TreeSet
+        \item Ligner veldig på Heap
+        \item Kan kun brukes med Comparable
+        \item Data invariant:
+        \begin{itemize}
+        \item Verider til venstre er mindre enn roten
+        \item Verdier til høyre er større enn roten
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Balansert}
+    \begin{itemize}
+        \item Siden kjøretid er høyden av treet må vi prøve å holde høyden til \( O\left( \log\left( n \right) \right) \)
+        \item Balansering kan gjøres på mange måter.
+        \item Beskrives i kapittel 3.3 i boken
+        \item Hvis man finner en node der forskjellen mellom antall noder til venstre og antall noder til høyre er stor, da må man flytte fra høyre til venstre
+        \item Det å balansere et tre kan ta litt mer en \( O\left( \log\left( n \right) \right) \) tid
+        \item Som i ArrayList sin "grow" metode, trengs balansering ikke gjøres hver gang.
+        \item Detaljene i 3.3 er ikke relevant ofr eksamen, men viktig å forstå at balansering er nødvendig for \( \log\left( n \right) \) kjøretid.
+    \end{itemize}
+
+    \subsection{HashSet}
+
+    \begin{itemize}
+        \item Kan brukes på alle objekter i Java
+        \item Krever metoden \texttt{hashCode()}
+            \begin{itemize}
+                \item Mer om den senere
+            \end{itemize}
+        \item Bruker mer minne, men er rask
+        \item Ikke effektivt hvis du trenger å finne max/min
+    \end{itemize}
+\end{document}
