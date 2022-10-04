@@ -1,0 +1,169 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 10}
+
+    \subsection{Graf}
+    Grafer er en datastruktur som består av
+    \begin{itemize}
+        \item Noder (Vertices)
+        \item Kanter (Edges) - par av noder
+    \end{itemize}
+
+    Binære trær er grafer.
+
+    \subsection{Hva kan grafer representere?}
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                 \textbf{Noder}&\textbf{Kanter}  \\
+                \hline
+                 Byer& Veier  \\
+                 Person& Vennskap  \\
+                 Datamaskin& Nettverkskabel  \\
+                 Spill posisjon& Gyldig trekk  \\
+                 Student, emnet& Tar emnet  \\
+                 Robot, Job& Assigned  \\
+                 Lag& Kamp  \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \subsubsection{Gradtall}
+    Antall kanet som inneholder noden
+
+    \subsubsection{Naboskap}
+    Alle noder som kan nås med en kant
+
+    \[ N\left( b \right)=\left\{ a,c,f \right\} \wedge N\left[ b \right] = \left\{ a,b,c,f \right\}\]
+
+    \subsubsection{Sykel}
+    Noder og kanter som gjør at du kan gå fra en node og tilbake til seg selv mens du bare besøker hver node i sykelen akkurat en gang.
+
+    \subsubsection{Tre}
+    Et tre er en sammenhengende graf uten sykler.
+
+
+    \subsection{Graf datastruktur}
+    \begin{itemize}
+        \item Viktige metoder i \texttt{Graph<V,E>}
+            \begin{itemize}
+                \item \texttt{boolean adjacent (V a, V b)}
+                \item \texttt{Iterable<V> vertices()}
+                \item \texttt{Iterable<E> edges()}
+                \item \texttt{List<V> neighbours(V v)}
+                \item \texttt{add/remove metoder?}
+            \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Kjøretid i grafer}
+    \begin{itemize}
+        \item Kjøretid i grafer avhenger av 2 parametere
+            \begin{itemize}
+                \item \( N \) er antall noder
+                \item \( M \) er antall kanter
+            \end{itemize}
+        \item Noen ganger er man mer presis
+            \begin{itemize}
+                \item \( D \) = degree(v)
+                \item \( L \) = length of longest cycle
+                \item \( C \) = number of components
+            \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Graf datastruktur - Kantlise}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.55\textwidth]{edgelist}
+        \end{center}
+    \end{figure}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                \textbf{Metode} & \textbf{Kjøretid} \\
+                Ajacent & \( O\left( m \right) \) \\
+                Vertices & \( O\left( n \right) \) \\
+                Edges & \( O\left( m \right) \) \\
+                Neighbours & \( O\left( m \right) \) \\
+                addVertex & \( O\left( 1 \right) \)\\
+                addEdge & \( O\left( 1 \right) \) \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \subsubsection{Graf datastruktur - Naboliste}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.55\textwidth]{neighlist}
+        \end{center}
+    \end{figure}
+
+    \begin{itemize}
+        \item For hver node, hold liste av naboer
+        \item Hold en liste av noder \texttt{List<V>}
+    \end{itemize}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                \textbf{Metode} & \textbf{Kjøretid} \\
+                \hline
+                 Adjacent& \( O\left( \text{degree}  \right) \)  \\
+                 Vertices& \( O\left( n \right) \)  \\
+                 Edges& \( O\left( m \right) \)  \\
+                 Neighbours& \( O\left( \text{degree} \right) \)  \\
+                 addVertex& \( O\left( 1 \right) \)  \\
+                 addEdge& \( O\left( 1 \right) \)  \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \subsubsection{Graf datastruktur - Nabomatrise}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.55\textwidth]{neighmat}
+        \end{center}
+    \end{figure}
+
+    \begin{itemize}
+        \item 2 dimensjonell boolean tabell
+        \item Bruker mye minne
+    \end{itemize}
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                \textbf{Metode} & \textbf{Kjøretid} \\
+                \hline
+                 Adjacent& \( O\left(1\right) \)  \\
+                 Vertices& \( O\left( n \right) \)  \\
+                 Edges& \( O\left( n^2 \right) \)  \\
+                 Neighbours& \( O\left(n \right) \)  \\
+                 addVertex& \( O\left( n^2 \right) \) or \( O\left(n\right) \)  \\
+                 addEdge& \( O\left( 1 \right) \)  \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    \subsection{Sammenhengende komponenter}
+    Hvordan kan vi finne alle sammenhengende komponenter? Vi skal nå se på en algoritme som finner sammenhengende komponenter i en graf.
+
+    \begin{enumerate}
+        \item Søke i grafen med noe vi kaller bredde først søk.
+        \item Søke i grafen med noe vi kaller dybde først søk.
+        \item Bruke Union-Find (vil lære om dette snart)
+    \end{enumerate}
+\end{document}
