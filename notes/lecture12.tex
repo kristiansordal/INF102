@@ -1,0 +1,59 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 12}
+
+    \subsection{Finn korteste sti}
+    Gitt en graf, finn koteste sti fra en node til en annen, f. eks node \( c \) til node \( h \).
+
+    \subsubsection{Dijkstras algorithm}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\textwidth]{shortestpath}
+        \end{center}
+    \end{figure}
+
+    \[ \text{found:} c,d \quad \text{toSearch}: \left( c,d \right):8, \left( d,e \right):13 \]
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\textwidth]{shortestpath2}
+        \end{center}
+    \end{figure}
+
+    ... osv
+
+    \subsection{Minimum Spanning Tree}
+    Et minimum spanning tree av grafen \( G \) er en delmenge \( T \) av kantene i \( G \) slik at:
+
+    \begin{itemize}
+        \item Alle par av noder har en sti mellom seg som kun bruker kanter i \( T \).
+        \item \( T \) er den delmenged med minst sum av vekter over alle kanter i \( T \).
+    \end{itemize}
+
+    Forrige uke fant vi MST med Prims algoritme.
+
+    \subsection{Hvordan vite om sykel oppstår?}
+    \begin{itemize}
+        \item I Prim's algorithme sjekket vi om begge endene var i found
+            \begin{itemize}
+                \item Dette virket fordi vi startet fra en node
+                \item Og kanten vi så på hadde 1 ende i found
+                \item ALle nodene i found var i samme komponent
+            \end{itemize}
+        \item I Kruskal's har vi mange sammenhengende komponenter
+        \item Vi må sjekke om begge endepunktene er i samme komponent!
+    \end{itemize}
+
+    \subsubsection{Hvilke metoder trenger vi}
+
+    Union Find interface:
+    \begin{itemize}
+        \item \texttt{public E find (E elem);}
+        \item \texttt{public void union (E elem1, E elem2);}
+        \item \texttt{public int found();}
+        \item \texttt{Iterable<E> group(E elem);}
+    \end{itemize}
+\end{document}
