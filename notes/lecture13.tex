@@ -1,0 +1,32 @@
+\documentclass{article} \input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 13}
+
+    \subsection{Oblig 1 - Oppgave 3}
+    Hvorfor er \texttt{ClosestStrategy} ikke optimal?
+
+    \begin{itemize}
+        \item Første observasjon er at det for noen input er stor \texttt{backLog} mens for andre er den liten.
+        \item Gjør vi små jobber blir flere jobber ferdig fort
+        \item Små jobber ligger nært roboter.
+    \end{itemize}
+
+    Hvor mange jobber er på \texttt{backLog}? Det kan være lurt å legge til metoder for å hente ut ekstra statistikk.
+
+    Maks størrelse på \texttt{backLog}
+
+    \begin{itemize}
+        \item Input 1: 129
+        \item Input 2: 656
+        \item Input 3: 0
+        \item Input 4: 302
+        \item Input 5: 2
+        \item Input 6: 0
+    \end{itemize}
+
+    For de input med mye på \texttt{backLog}
+    \begin{itemize}
+        \item Hva skjer om vi velger minste jobb først?
+    \end{itemize}
+\end{document}
