@@ -1,0 +1,78 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Forelesning 14}
+    \subsection{Rettede grafer}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.95\textwidth]{directedgraph}
+        \end{center}
+        \caption{Eksempel på en rettet graf}
+        \label{fig:directedgraph}
+    \end{figure}
+
+    Noder som kun har utgående kanter kalles \texttt{source}, og noder som kun har inngående noder kalles \texttt{sink}.
+
+    \subsubsection{Nye metoder i rettede grafer}
+
+    \begin{itemize}
+        \item \texttt{Iterable<V> outNeighbours (V v)}
+        \item \texttt{Iterable<V> inNeighbours (V v)}
+        \item \texttt{int outDegree}
+    \end{itemize}
+
+    \subsubsection{BFS og DFS i rettet graf}
+    \begin{itemize}
+        \item Virker akkurat som i urettet graf
+        \item Der du før brukte \texttt{neighbours()}, må du nå bruke \texttt{outNeighbours()}
+        \item DFS kan burkes til å finne en rettet sykel
+            \begin{itemize}
+                \item Ser dere hvordan?
+                \item Jo, hvis vi kommer til en node som allerede ligger i \texttt{found}.
+            \end{itemize}
+    \end{itemize}
+
+    \subsection{Strongly connected components}
+    \begin{itemize}
+        \item Forkortes SCC
+        \item Det finnes sti fra \( a \) til \( b \) og sti fra \(  b \) til \( a \), hvis og bare hvis \( a \) og \( b  \) er i samme SCC.
+        \item Det vil si at en strongly connected component er et sett med noder der det alltid finnes en sti du kan følge for å komme dit du vil.
+    \end{itemize}
+
+    \subsection{Directed Acyclic Graph}
+    \begin{itemize}
+        \item En graf uten noen rettede sykler kaller vi en DAG.
+        \item Alle nodene i en DAG kan ordnes slik at alle kanter går fra venstre til høyre.
+        \item Hvordan kan vi finne en slik ordning?
+    \end{itemize}
+
+    \subsubsection{Topological sort (finn ordning)}
+    \begin{lstlisting}
+    int i = 0
+    while (g has a source)
+        let v be a source 
+        order(i) = v
+        i++
+        remove v from g
+    \end{lstlisting}
+
+
+    \subsubsection{Topological sort kjøretid}
+    \begin{itemize}
+        \item Kan vi finne neste source fortere enn O(n)?
+            \begin{itemize}
+                \item Ja, ha en liste over alle som har gradtall 0.
+                \item Hver gang gradtall oppdateres
+                    \begin{itemize}
+                        \item Hvis ny verdi er 0, legg til i liste
+                    \end{itemize}
+                \item Total \( O(m) \)
+                    \begin{itemize}
+                        \item Oppdatering \( O(m) \)
+                        \item \( O(n) \) flyttinger til/fra liste
+                    \end{itemize}
+            \end{itemize}
+    \end{itemize}
+\end{document}
