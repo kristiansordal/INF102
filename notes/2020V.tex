@@ -1,0 +1,161 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Oppgave 1}
+    Gjør kjøretidsanalyse av følgende algoritmer
+
+    \subsection{a)}
+    \begin{lstlisting}
+public static double F1(double x, int k) {
+    if (k == 1) {
+        return x;    
+    }
+    return x * F1(x, k - 1);
+    \end{lstlisting}
+
+    \begin{ans}
+        \texttt{if} - setningen er en operasjon, og har kjøretid: \( O(1) \). \texttt{return x * F1(x, k - 1)} teller for tre operasjoner, og har kjøretid \( O(3) \). Disse operasjonene kjøres \texttt{k} ganger. Siste operasjon: \texttt{return x} kjøres en gang, og teller for to operasjoner, og har kjøretid \( O(2) \). Vi ender opp med en eksakt kjøretid \( O(4k + 2) \). Dette er i Big-O notasjon lik \( O(k) \).
+
+    \end{ans}
+
+    \subsection{b)}
+
+    \begin{lstlisting}
+public static double F2(double x, int k) {
+    if (k == 1) {
+        return x;    
+    }
+    int k2 = k/2;
+    return F2(x, k2) * F2(x, k2);
+    \end{lstlisting}
+
+    \begin{ans}
+        Operasjonene har følgende kjøretider:
+
+        \begin{table}[H]
+            \begin{center}
+                \begin{tabular}[c]{|l|l|}
+                    \hline
+                    Operasjon & Kjøretid  \\
+                    \hline
+                     \texttt{if (k == 1)}& 1  \\
+                     \texttt{return x;} & 2  \\
+                     \texttt{int k2 = k / 2;}& 2 \\
+                     \texttt{retun F2(x, k2) * F2(x,k2)}& 4  \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{table}
+    
+        Vi har at \texttt{F2(x, 1) = 2}, og ettersom \texttt{k2} halveres i hvert funksjonskall, og \texttt{return} setningen kjører \texttt{F2} to ganger, ender vi opp med \( O(7k + 2) \), som er \( O(k) \) i Big-O notasjon
+    \end{ans}
+
+    \subsection{c)}
+    \begin{lstlisting}
+public static double F3(double x, int k) {
+    if (k == 1) {
+        return x;
+    }
+    double res = F3(x, k/2);
+    return res*res;
+}
+    \end{lstlisting}    
+
+    \begin{ans}
+Operasjonene har følgende kjøretider:
+
+\begin{table}[H]
+    \begin{center}
+        \begin{tabular}[c]{|l|l|}
+            \hline
+             Operasjon& Kjøretid  \\
+            \hline
+             \texttt{if (k == 1)}& 1  \\
+             \texttt{return x;} & 2  \\
+             \texttt{double res = F3(x, k / 2)}& 3 \\
+             \texttt{return res*res}& 2  \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+Vi har at \texttt{F3(x, 1)} har kjøretid \( O(2) \). Videre har vi \texttt{F3(x, k)} har kjøretid \( O(5\log k)\), vi får Big-O kjøretid på \( O(\log k) \).
+    \end{ans}
+
+
+    \section{Oppgave 2}
+
+    Gi rekkefølgen på noder besøkt for følgende graf
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.65\textwidth]{graph}
+        \end{center}
+    \end{figure}
+
+    \subsection{a)}
+    \begin{ans}
+        DFS
+
+        \[ 0,5,4,1,3,7,6,8,9,2 \]
+    \end{ans}
+
+    \subsection{b)}
+    \begin{ans} 
+        Rekkefølgen på nodene når DFS er ferdig med å behandle nodene.
+
+        \[ 9,8,6,7,3,1,2,4,5,0 \]
+    \end{ans}
+
+    \subsection{c)}
+
+    \begin{ans}
+        Gi rekkefølgen på de sterkt sammenhengende komponentene som de oppdages med Kosaraju-Sharir algoritmen.
+
+        \[ (9,3,7,6,8) (1,5,4,2) (0) \]
+
+
+    \end{ans}
+
+    \subsection{d)}
+
+
+    \begin{ans}
+    Gi rekkefølgen på nodene etter første besøk iht. BFS
+
+    \[ 0,5,9,4,3,1,2,7,6,8\]
+        
+    \end{ans}
+
+    \section{Oppgave 3}
+
+    \subsection{a)}
+    Hva er kjøretiden til quicksort dersom vi alltid velger det første elementet som pivot og input er sortert i stigende rekkefølge ved start?
+    \begin{ans}
+        \[ O(n^2) \]
+    \end{ans}
+
+    \subsection{b)}
+    Hva er kjøretiden til innsettingssortering dersom input er sortert i synkende rekkefølge ved start?
+
+    \begin{ans}
+        \[ O(n^2) \]
+    \end{ans}
+
+    \subsection{c)}
+
+    Hva er kjøretiden til mergesort dersom input er sortert i stigende rekkefølge ved start?
+
+    \begin{ans}
+    \[ O(n \log n) \]
+    \end{ans}
+
+    \subsection{d)}
+    Hva er kjøretiden til mergesort dersom input er sortert i stigende rekkefølge ved start og vi hopper over alle "merge" operasjoner av to lister A og B hvis siste elementet i A er mindre eller lik første elementet i B?
+    \begin{ans}
+    \[ O(n) \]
+    \end{ans}
+
+
+\end{document}
