@@ -70,6 +70,50 @@
     \subsection{Hash-tabell (HashMap)}
     \subsection{Binært Søketre}
     \subsection{Union Find}
+    A Union Find, or Disjoint Set Union data structure is used in Kruskal's algorithm in order to find the minimum spanning tree. 
+    \begin{lstlisting}
+class UnionFind <V> {
+	public HashMap<V, DSUNode<V>> components = new HashMap<>();
+
+	public void makeSet(V v) {
+		if (!components.containsKey(v)) {
+			components.put(v, new DSUNode<V>(v, v));
+		}
+	}
+
+    public boolean connected(V v, V u) {
+        return find(v).equals(find(u));
+    }
+
+	public V find(V v) {
+		DSUNode<V> curr = components.get(v);
+		if (!curr.parent.equals(curr.node)) {
+			components.put(v, new DSUNode<V>(find(curr.parent), v));
+			return components.get(v).parent;
+		}
+		return v;
+	}
+
+	public void union(V v, V u) {
+		V x = find(v);
+		V y = find(u);
+
+		if (!x.equals(y)) {
+            components.put(y, new DSUNode<V>(x, y));
+		}
+	}
+}
+
+class DSUNode<V> {
+	public V parent;
+	public V node;
+
+	public DSUNode(V parent, V node) {
+		this.parent = parent;
+		this.node = node;
+	}
+}
+    \end{lstlisting}
     \subsection{Graf}
     \section{Algoritmer}
     \subsection{Søke Algoritmer}
@@ -202,12 +246,119 @@ public class QuickSort <T extends Comparable<? super T>> {
         
     \end{lstlisting}
     \subsubsection{Merge Sort}
+    Merge Sort is also a sorting algorithm based on the divide-and-conquer principle. It continusly splits the list into smaller and smaller sublists until they contain only one element, they are then considered sorted. We then continusly merge sublists, making sure they are sorted while we merge them. The final list will then be the sorted list. Merge sort can achieve a runtime of \( O\left( n \log \left(  n \right) \right) \)
+    \begin{lstlisting}
+public class MergeSort<T extends Comparable<? super T>> {
+    public List<T> sort(List<T> list) {
+        if (list.size() <= 1) {
+            return list;
+        }
+
+        List<T> left = new ArrayList<>();
+        List<T> right = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (i < list.size() / 2) {
+                left.add(list.get(i));
+            } else {
+                right.add(list.get(i));
+            }
+        }
+
+        left = sort(left);
+        right = sort(right);
+
+        return merge(left, right);
+    }
+
+    private List<T> merge(List<T> left, List<T> right) {
+        List<T> list = new ArrayList<>();
+
+        while (!left.isEmpty() && !right.isEmpty()) {
+            if (left.get(0).compareTo(right.get(0)) <= 0) {
+                list.add(left.remove(0));
+            } else {
+                list.add(right.remove(0));
+            }
+        }
+
+        while (!left.isEmpty()) {
+            list.add(left.remove(0));
+        }
+        
+        while (!right.isEmpty()) {
+            list.add(right.remove(0));
+        }
+
+        return list;
+    }
+}
+        
+    \end{lstlisting}
     \subsubsection{Insertion Sort}
     \subsubsection{Selection Sort}
     \subsection{Graf Algoritmer}
-    \subsubsection{Depth First Search}
-    \subsubsection{Breadth First Search}
+    \subsubsection{BFS \& DFS}
+    BFS and DFS are graph-searching algorithms for unweighted graph, it is a very versatile algorithm, with a runtime of \( O(n)\). These algorithms can be used to find anode furthest from the root, detect cycles, generating depth / height maps for a graph, and topological sorting.
+    \begin{lstlisting}
+public class BFS<V> {
+    public V furthest(Graph<V> g, V root) {
+        HashSet<V> found = new HashSet<>();
+        LinkedList<V> toSearch = new LinkedList<>();
+        V furthest = root;
+
+        while (!toSearch.isEmpty()) {
+            // --- change to removefirst and we'll have DFS
+            V next = toSearch.removeLast();
+            if (found.contains(next)) {
+                continue;
+            }
+
+            found.add(next);
+            furthest = next;
+            g.neighbours(next).forEach(n -> toSearch.add(n));
+        }
+
+        return furthest;
+    }
+}
+    \end{lstlisting}
     \subsubsection{Minimum Spanning Tree}
+    \paragraph{Kruskal's}
+    \begin{lstlisting}
+public class Kruskal {
+	public <V, E extends Comparable<E>> List<Edge<V>> mst(WeightedGraph<V, E> g) {
+		List<Edge<V>> edges = new ArrayList<>();
+		List<Edge<V>> mst = new ArrayList<>();
+		int size = g.size();
+
+
+		// --- create a list of the edges and sort them, then add them to the vertices list
+        g.edges().forEach(e -> edges.add(e));
+		edges.sort(g); // o(m log (m))
+		UnionFind<V> UF = new UnionFind<>();
+
+		for (int i = 0; i < edges.size(); i++) { // o(n^2)
+			Edge<V> current = edges.get(i);
+			UF.makeSet(current.a);
+			UF.makeSet(current.b);
+
+            if (!UF.connected(current.a, current.b)) {
+                UF.union(current.a, current.b);
+                mst.add(current);
+            }
+
+			if (mst.size() == size - 1) {
+				return mst;
+			}
+		}
+
+		return mst;
+	}
+}
+        
+    \end{lstlisting}
+
     \subsubsection{Dijkstra's Algorithm}
     \subsubsection{Bellman-Ford}
 
