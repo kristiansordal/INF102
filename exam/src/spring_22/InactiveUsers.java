@@ -4,6 +4,7 @@ import java.util.ArrayList;
 // import java.util.ArrayList;
 // import java.util.Collections;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 public class InactiveUsers {
@@ -31,6 +32,8 @@ public class InactiveUsers {
         active.add("d");
         active.add("e");
 
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        pq.remo
         List<String> inactive = getInactive(users, active);
         System.out.println(inactive);
     }

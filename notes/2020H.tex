@@ -1,0 +1,280 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+\section{Eksamen Høst 2020}
+    \subsection{Oppgave 1}
+    Hva er kjøretiden til denne koden?
+
+    \begin{lstlisting}
+public double interestOnLoan(double amount, int n) {
+    amount = amount * 1.01; 
+}
+return amount
+    \end{lstlisting}
+
+    \begin{ans}
+        \[ O(n) \]
+    \end{ans}
+
+    \subsection{Oppgave 2}
+    Hva er kjøretiden til denne koden?
+
+    \begin{lstlisting}
+public static int countOneBits(int n) {
+    int bits = 0;
+    while (n > 0) {
+        if (n % 2 == 1) {
+            bits++;
+        }
+        n = n / 2;
+    }
+    return bits;
+}
+    \end{lstlisting}
+
+    \begin{ans}
+        \[ O\left( \log n  \right) \]
+    \end{ans}
+
+    \subsection{Oppgave 3}
+    Hva er kjøretiden til denne koden?
+        
+    \begin{lstlisting}
+public static int countSteps (int n) {
+    int pow = 2;
+    int steps = 0;
+
+    for(int i = 0; i < n; i++) { // n
+        if (i == pow) { // n
+            pow *= 2;
+            for(int j = 0; j < n; j++) {
+                steps++;
+            }
+        } else {
+            steps++;
+        }
+    }
+    return steps;
+} 
+    \end{lstlisting}
+
+    \begin{ans}
+        \[ O\left( n \log n \right) \]
+    \end{ans}
+
+    \subsection{Oppgave 4}
+    Hva er kjøretiden til denne koden?
+    \begin{lstlisting}
+public staic String makeRandomString(int n) {
+    String ans = "";
+    for (int i = 0; i < n; i++) {
+        char c = (char) ('a'+26*Math.random());
+        ans += c;
+    }
+    return ans;
+    
+} 
+    \end{lstlisting}
+
+    \begin{ans}
+        \[ O(n^2) \]
+    \end{ans}
+
+    \subsection{Oppgave 5}
+    Hva er kjøretiden til denne koden?
+
+    \begin{lstlisting}
+public static double computeAreaUnderCurve(LinkedList<Double> y) {
+    Double area = 0.0;
+
+    for(int i = 1; i < y.size(); i++) {
+        area = area + (y.get(i - 1) + y.get(i)) / 2;
+    }
+    return area;
+}
+    \end{lstlisting}
+
+    \begin{ans}
+        \[ O(n^2) \]
+    \end{ans}
+
+    \subsection{Oppgave 6}
+    Hva er kjøretiden til denne koden?
+    \begin{lstlisting}
+// n = list.size() 
+public static Collection<Integer> findLargestK(ArrayList<Integer> list, int k) {
+    PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+    for(int num: list) { // n
+        if(pq.size() < k || pq.peek() < num) { // 1
+            pq.add(num) // log k
+        }
+
+        if(pq.size() > k) { // 1
+            pq.poll(); // log k
+        }
+    }
+    return pq;
+}
+    \end{lstlisting}
+    Har kan du anta at \( k < n \).
+
+    \begin{ans}
+        \[ O\left( n \log\left( k \right) \right) \]
+    \end{ans}
+
+    \subsection{Oppgave 7}
+    Denne koden kalles når \texttt{words} er tom og vil da fylle inn settet \texttt{words}. Hva er kjøretiden til denne koden?
+
+    \begin{lstlisting}
+HashSet<String> dictionary;        
+HashSet<String> words;
+
+// n = dictionary.size()
+// k = letters.length()
+
+private void possibleWords(String word, String letters) {
+    if(!word.isBlank() && dictionary.contains(word)) { // n
+        words.add(word); // 1
+    }
+
+    int k = letters.length(); // 1
+
+    for(int i = 0; i < k; i ++) { // k
+        // add letter to word
+        String nextWord = word + letters.charAt(i); // k
+
+        // remove letter from available letters
+        String nextLetters = letters.substring(0, i); 
+
+        if (i < k - 1) {
+            nextLetters = nextLetters + letters.substring(i + 1, k);
+        }
+
+        // continue searching
+        possibleWords(nextWord, nextLetters);
+    }
+}
+    \end{lstlisting}
+
+    Her kan du anta at \( k < n \).
+
+    \begin{ans}
+        \[ O\left( k! \cdot  k  \right) \]
+        
+    \end{ans}
+
+    \subsection{Oppgave 8}
+    Forklar hvordan algoritmen \texttt{QuickSort} ville sortert denne listen med tall.
+
+    \[ 4,7,15,1,9,3,6,12,2 \]
+
+    \begin{ans}
+
+        \texttt{QuickSort} bruker en \texttt{pivot} for å dele opp listen i verdier som er større enn og mindre enn denne verdien. Sorteringen vil skje på følgende måte: Som første pivot vil vi bruke veriden lengst til høyre i listen. Høyre og venstre er de indeksene i listen som vi foreløpig ser på, og er initalisert til 0 og lengden av listen - 1, som i dette tilfellet er 8.
+
+        \begin{table}[H]
+            \begin{center}
+                \begin{tabular}[c]{|l|l|l|l|}
+                    \hline
+                    Liste&Pivot&Høyre&Venstre  \\
+                    \hline
+                     4,7,15,1,9,3,6,12,2&2&0&9  \\
+                    \hline
+                     1,2,4,3,6,7,9,12,15&7&2&8 \\
+                    \hline
+                     1,2,4,3,6,7,9,12,15&6&2&4 \\
+                    \hline
+                     1,2,3,4,6,7,9,12,15&3&2&3 \\
+                    \hline
+                     1,2,3,4,6,7,9,12,15&15&6&8 \\
+                    \hline
+                     1,2,3,4,6,7,9,12,15&12&6&7 \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{table}
+        
+    \end{ans}
+
+    \subsection{Oppgave 9}
+    DFS (dybde først søk) er en metode for å besøke alle nodene i en graf. Hver node blir kun besøkt en gang. Forklar hvordan DFS kjører på denne grafen ved å stegvis beskrive hva algoritmen gjør og i hvilken rekkefølge nodene vil bli besøkt. Du skal begynne søket i node "a". Det er mange rette rekkefølger, du skal bare gi en mulig rekkefølge for DFS.
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.45\textwidth]{dfsgraph9}
+        \end{center}
+    \end{figure}
+
+    \begin{ans}
+        DFS opererer på \textit{Last in, First out} prinsippet. Den vil derfor besøke alle nodene i siten til et løv, før den går videre opp i grafen og finner andre noder. Vi kan beskrive rekkefølgen og hva algoritmen gjør i en tabell.
+
+        \begin{table}[H]
+            \begin{center}
+                \begin{tabular}[c]{|l|l|l|l|}
+                    \hline
+                    Nåværende node& Neste node & Kø & Besøkte  \\
+                    \hline
+                      a&b&c,b& \\
+                    \hline
+                      b&h&c,f,h&a \\
+                    \hline
+                      h&e&c,f,e&a,b \\
+                    \hline
+                      e&g&c,f,f,g&a,b,h \\
+                    \hline
+                      g&f&c,f,f&a,b,h,e \\
+                    \hline
+                      f&c&c,f,c&a,b,h,e,g \\
+                    \hline
+                      c&d&c,f,d&a,b,h,e,g,f \\
+                    \hline
+                      d&&c,f&a,b,h,e,g,f,c \\
+                    \hline
+                      &&&a,b,h,e,g,f,c,d \\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{table}
+    \end{ans}
+
+\subsection{Oppgave 10}
+BFS (bredde først søk) er en metode for å besøke alle nodene i en graf. Hver node blir kun besøkt en gang. Forklar hvordan BFS kjører på denne rettede grafen ved å beskrive hvilken rekkefølge nodene vil bli besøkt. Du skal begynne søket i node "a". Det er mange rette svar du skal bare gi en mulig rekkefølge for BFS.
+
+
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.45\textwidth]{bfsgraph10}
+    \end{center}
+\end{figure}
+
+\begin{ans}
+    BFS opererer på \textit{First in, First out} prinsippet, og vi kan beskrive hva algoritmen gjør med en tabell
+        \begin{table}[H]
+            \begin{center}
+                \begin{tabular}[c]{|l|l|l|l|}
+                    \hline
+                    Nåværende node& Neste node & Kø & Besøkte  \\
+                    \hline
+                      a&d&d&\\
+                    \hline
+                      d&g&g,h&a\\
+                    \hline
+                      g&h&h,c&a,d\\
+                    \hline
+                      h&c&c&a,d,g\\
+                    \hline
+                      c&f&f,a&a,d,g,h\\
+                    \hline
+                      f&e&a,e&a,d,g,h,c\\
+                    \hline
+                      e&&a&a,d,g,h,c,f\\
+                    \hline
+                      &&&a,d,g,h,c,f,e\\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{table}
+\end{ans}
+\end{document}

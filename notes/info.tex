@@ -1,0 +1,214 @@
+\documentclass{article}
+\input{preamble.tex}
+
+\begin{document}
+    \section{Data Strukturer}
+    \subsection{Linked List}
+    \paragraph{Methods}
+    A \texttt{LinkedList} has the following methods
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                 Method&Runtime  \\
+                \hline
+                 \texttt{add(E elem)}& \( O\left( 1 \right) \) for all indices\\
+                 \texttt{contains(E e)}& \( O(n) \) \\
+                   \texttt{remove(E e)}& \( O(n) \) \\
+                   \texttt{removeFirst(E e)}& \( O(1) \) \\
+                   \texttt{removeLast(E e)}& \( O(1) \) \\
+                   \texttt{toArray()}& \( O(n) \) \\
+                   \texttt{indexOf(E e)}& \( O(n) \) \\
+                 \texttt{get()}& \( O(n) \) \\
+                 \texttt{set(int i, E e)} & \( O(n) \) \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+
+    
+    \subsection{Array List}
+    An \texttt{ArrayList} has the following methods
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                 Method&Runtime  \\
+                \hline
+                 \texttt{add(int index, E elem)}& \( O\left( n \right) \) \\
+                 \texttt{add(E elem)}& \( O\left( n \right) \) \\
+                 \texttt{contains(E e)}& \( O(n) \) \\
+                   \texttt{remove(E e)}& \( O(n) \) \\
+                   \texttt{toArray()}& \( O(n) \) \\
+                   \texttt{indexOf(E e)}& \( O(n) \) \\
+                 \texttt{get}& \( O(1) \) \\
+                 \texttt{set(int i, E e)} & \( O(1) \) \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+    \subsection{Heap (Priority Queue)}
+    A heap, or Priority Queue, implements the following methods
+
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}[c]{|l|l|}
+                \hline
+                Method & Runtime \\
+                \hline
+                \texttt{add(E e)}& \( O\left( \log n \right) \)  \\
+                \texttt{offer(E e)}& \( O\left( \log n \right) \)  \\
+                \texttt{remove(E e)}& \( O\left( \log n \right) \)  \\
+                \texttt{poll()}& \( O\left( \log n \right) \)  \\
+                \texttt{peek()}& \( O(1) \)  \\
+                \texttt{element()}& \( O(1) \)  \\
+                \texttt{contains(E e)}& \( O(n) \)  \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{table}
+    \subsection{Hash-tabell (HashMap)}
+    \subsection{Binært Søketre}
+    \subsection{Union Find}
+    \subsection{Graf}
+    \section{Algoritmer}
+    \subsection{Søke Algoritmer}
+    \subsubsection{Binary Search}
+    A binary search algorithm is a searching algorithm that finds the index of the element sent in as argument to the function. A prerequisite for the binary search algorithm is that the list we are performing the search on is \textbf{sorted}.
+
+    \paragraph{Runtime} The runtime of the binary search algorithm is \( O\left( \log\left( n \right) \right) \).
+    \medskip
+
+    Below is an implementation of the binary search algorithm.
+    \begin{lstlisting}
+public class BinarySearch<E extends Comparable<? super E>> {
+    List<E> sorted;
+
+    public BinarySearch(ArrayList<E> sorted) {
+        this.sorted = sorted;
+    }
+
+    public int search(E target) {
+        int lo = 0;
+        int hi = sorted.size() - 1;
+        int mid = 0;
+
+        while (lo <= hi) {
+            mid = hi - (hi - lo) / 2;
+
+            if (sorted.get(mid).compareTo(target) < 0) {
+                lo = mid + 1;
+            } else if (sorted.get(mid).compareTo(target) > 0) {
+                hi = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        throw new NoSuchElementException("Element not in list");
+    }
+}
+    \end{lstlisting}
+    \subsubsection{Quick Select}
+    \texttt{QuickSelect} is a selection algorithm to find the \texttt{kth} smallest (or \texttt{kth} largest) element in a list. Whats special about the \texttt{QuickSelect} algorithm, is that it is not necessary that the list we are selecting from is sorted. It is related to the \texttt{QuickSort} algorithm in that it selects a \texttt{pivot}, and partitions the list based on this pivot. In contrast to the \texttt{QuickSort} algorithm, \texttt{QuickSelect} only recurses into one of the partitions of the list. It chooses the list which contains the \texttt{kth} element.
+\medskip
+
+\paragraph{Runtime} The \texttt{QuickSelect} algorithm has an average runtime of \( O(n) \), and a worst case of \( O(n^2) \). The worst case occurs when pivots are chosen poorly, such as only decreaseing the pivot by one every time. This is easily mitigated by choosing a pivot in the of the current search scope at random.
+\medskip
+
+Below is an implementation of the algorithm
+
+\begin{lstlisting}
+public class QuickSelect<T extends Comparable<? super T>> {
+    public T select(List<T> list, int left, int right, int k) {
+        if (left == right) {
+            return list.get(left);
+        }
+
+        Random rand = new Random();
+        int pivot = rand.nextInt(left, right);
+        pivot = partition(list, left, right, pivot);
+
+        if (k == pivot) {
+            return list.get(k);
+        } else if (k < pivot) {
+            return select(list, left, pivot - 1, k);
+        } else {
+            return select(list, pivot + 1, right, k);
+        }
+    }
+
+    private int partition(List<T> list, int left, int right, int pivot) {
+        T pivotVal = list.get(pivot);
+        Collections.swap(list, pivot, right);
+        int storeIndex = left;
+
+        for (int i = left; i < right; i++) {
+            if (list.get(i).compareTo(pivotVal) < 0) {
+                Collections.swap(list, storeIndex++, i);
+            }
+        }
+        Collections.swap(list, right, storeIndex);
+        return storeIndex;
+    }
+}
+\end{lstlisting}
+\newpage
+    \subsection{Sortering}
+    \subsubsection{Quick Sort}
+    \texttt{QuickSort} is a sorting algorithm that operates on the Divide and Conquer principle. It is a sorting algorith that can be done both in place, and not in place. It works by selecting a pivot in the list, and moves all elements that are smaller than the pivot to the left, and all that are greater to the right. Next, these lists are sorted recursively.
+\medskip
+
+\paragraph{Runtime} The \texttt{QuickSort} algorithm has a best-case runtime of \( O(n \log n) \), and a worst case runtime of \( O\left( n^2 \right) \).
+\medskip
+
+Below is an implementations of the \texttt{QuickSort} algorithm.
+    \begin{lstlisting}
+public class QuickSort <T extends Comparable<? super T>> {
+
+    public List<T> sort(List<T> list) {
+        int left = 0;
+        int right = list.size() - 1;
+        return qsort(list, left, right);
+    }
+
+    private List<T> qsort(List<T> list, int left, int right) {
+        if (left >= right || left < 0) {
+            return list;
+        }
+
+        int pivot = partition(list, left, right);
+
+        qsort(list, left, pivot - 1);
+        qsort(list, pivot + 1, right);
+
+        return list;
+    }
+
+    private int partition(List<T> list, int left, int right) {
+        T pivot = list.get(right);
+
+        int tmp = left - 1;
+        for (int i = left; i < right; i++) {
+            if (list.get(i).compareTo(pivot) <= 0) {
+                Collections.swap(list, ++tmp, i);
+            }
+        }
+
+        Collections.swap(list, ++tmp, right);
+        return tmp;
+    }
+}
+
+        
+    \end{lstlisting}
+    \subsubsection{Merge Sort}
+    \subsubsection{Insertion Sort}
+    \subsubsection{Selection Sort}
+    \subsection{Graf Algoritmer}
+    \subsubsection{Depth First Search}
+    \subsubsection{Breadth First Search}
+    \subsubsection{Minimum Spanning Tree}
+    \subsubsection{Dijkstra's Algorithm}
+    \subsubsection{Bellman-Ford}
+
+\end{document}

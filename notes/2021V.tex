@@ -2,7 +2,8 @@
 \input{preamble.tex}
 
 \begin{document}
-    \section{Kjøretid}
+\section{Eksamen Vår 2021}
+    \subsection{Kjøretid}
 
     Read the following code and analyze the runtime. The variable \texttt{list} can either be an \texttt{ArrayList} or a \texttt{LinkedList}, will it matter which type of list it is? Explain your answer and write down the runtime for both type of lists. Express the runtime using Big-O notation as a function of \texttt{n = list.size()}. Explain how you found the running time.
 
@@ -44,7 +45,7 @@ for(int i = 0; i < list.size(); i++) {
         \end{align*}
     \end{ans}
 
-    \section{Binary Search}
+    \subsection{Binary Search}
     Explain what Binary Search is
     \begin{enumerate}
         \item When can we use binary search and what can we use it for? 
@@ -60,7 +61,7 @@ for(int i = 0; i < list.size(); i++) {
     A binary search has a runtime of \( O\left( \log n \right) \). We start the search at the middle of the list, obtaining the value in the list at this point, and check whether or not this value is higher or lower than our target. Depending on our answer, we discard the half of the list in which our target is \texttt{not} located, and repeat the process, by obtaining the middle value of the half of the list we are currently searching, and repeating this until we reach our target. As we can tell, because the search space decreased by half for each iteration, i.e \( (n, \frac{1}{2} n, \frac{1}{4} n, \frac{1}{8} n \cdots ) \), we can conclude that this algorithm has a runtime of \( O\left( \log n  \right) \).
     \end{ans}
 
-    \section{Slektstre}
+    \subsection{Slektstre}
 
     You shall make a software for genealogy where users can add persons and information who is a persons parents and who is a persons children (to keep this task simple we are not concerned with who is married to who and such, only biological parents/children). The problem you need to solve is: Given two persons, check if first person is a descendant of the second person.
 
@@ -87,7 +88,7 @@ public boolean isDescendant (Person person, Person ancestor) {
         As far as describing the runtime of this algorithm, it will be in a worst case \( O\left( n \right) \). This is because nodes are visited at most once, and there are \( n \) nodes in the graph. We could express the runtime by the amount of descendants a given ancestor has, as we would not bother searching any of the nodes which are not descendants of the current ancestor. This requires that we know how many descendants each person in the graph actually has, and this is not a given.
     \end{ans}
 
-    \section{Heap}
+    \subsection{Heap}
     Explain how the data structure Heap functions. (In java it's called a \texttt{PriorityQueue}).
 
     \begin{enumerate}
@@ -102,7 +103,7 @@ public boolean isDescendant (Person person, Person ancestor) {
         Inserting an element into an existing heap takes \( O\left( \log n \right) \) time, and therefore, inserting \( n \) elements will take \( O\left( n \log n \right) \) time. Inserting \( n \) elements at once into a heap, i.e. initalizing a \texttt{PriorityQueue} with an existing collection of elements, is a process often called \texttt{heapify}. This operation takes \( O(n) \) time.
     \end{ans}
 
-    \section{RandomList}
+    \subsection{RandomList}
     You shall implement a simple list dat astructure which only needs two methods. You will receive point for:
     
     \begin{itemize}
@@ -140,7 +141,7 @@ public class RandomList<T> implements IRandomList<T>{
     Given that we utlize an \texttt{ArrayList}, and that we are always adding to the tail of the list, the add method has a runtime of \( O\left( 1 \right) \). Next, the \texttt{removeRandom} method swaps a random element with the element at the tail of the list, which runs in constant time. The return statement also runs in constant time, because we are removing from the tail of the list. This gives the final runtime for this method \( O\left( 1 \right) \).
     \end{ans}
 
-    \section{Central Value}
+    \subsection{Central Value}
     In this task you shall implement a data structure.
 
     \begin{enumerate}
